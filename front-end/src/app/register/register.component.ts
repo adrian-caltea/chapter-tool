@@ -7,11 +7,21 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  Roles: any = ['Admin', 'User'];
+  roles: any = [
+    {
+      value: 0,
+      text: 'Manager'
+    },
+    {
+      value: 1,
+      text: 'Developer'
+    }
+  ];
   form: any = {
     username: null,
     email: null,
-    password: null
+    password: null,
+    role: null
   };
   isSuccessful = false;
   isSignUpFailed = false;
@@ -24,8 +34,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, email, password } = this.form;
-    this.authService.register(username, email, password).subscribe(
+    const { username, email, password, role } = this.form;
+    this.authService.register(username, email, password, role).subscribe(
       (data: any) => {
         console.log(data);
         this.isSuccessful = true;
@@ -36,5 +46,9 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = true;
       }
     );
+  }
+
+  selectRole(event: any) {
+    this.form.role = event
   }
 }

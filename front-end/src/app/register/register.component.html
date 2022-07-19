@@ -48,8 +48,8 @@
         </mat-form-field>
         <mat-form-field class="login-full-width">
           <mat-label>Choose a role...</mat-label>
-          <mat-select>
-            <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
+          <mat-select name="role" [(ngModel)]="form.role">
+            <mat-option [value]="role" *ngFor="let role of roles" (change)="selectRole($event)">{{role.text}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -59,7 +59,7 @@
         Signup failed!<br />{{ errorMessage }}
       </div>
     </form>
-    <div *ngIf="isSuccessful">
+    <div class="success" *ngIf="isSuccessful">
       Your registration is successful!
     </div>
   </mat-card>
