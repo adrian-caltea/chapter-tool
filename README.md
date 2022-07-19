@@ -1,2 +1,2 @@
 # chapter-tool
-A tool app for better one on one meetings
+A tool app to manage one on one meetings.

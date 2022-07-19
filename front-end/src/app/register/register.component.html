@@ -1,0 +1,66 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <form class="login-form" *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <mat-card-content>
+        <mat-form-field class="login-full-width">
+          <input matInput placeholder="Username"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+            minlength="3"
+            maxlength="20"
+            #username="ngModel"
+          >
+        </mat-form-field>
+        <mat-form-field class="login-full-width">
+          <input matInput placeholder="Email"
+            type="email"
+            name="email"
+            [(ngModel)]="form.email"
+            required
+            email
+            #email="ngModel"
+          >
+        </mat-form-field>
+        <mat-form-field class="login-full-width">
+          <input matInput placeholder="Password"
+            type="password"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+          >
+          <div class="red" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors['required']">Password is required</div>
+            <div *ngIf="password.errors['minlength']">
+              Password must be at least 6 characters
+            </div>
+          </div>
+        </mat-form-field>
+        <mat-form-field class="login-full-width">
+          <mat-label>Choose a role...</mat-label>
+          <mat-select>
+            <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button color="accent" class="btn-block">Register</button>
+      <div class="red" *ngIf="f.submitted && isSignUpFailed">
+        Signup failed!<br />{{ errorMessage }}
+      </div>
+    </form>
+    <div *ngIf="isSuccessful">
+      Your registration is successful!
+    </div>
+  </mat-card>
+</div>
