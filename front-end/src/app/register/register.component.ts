@@ -9,11 +9,11 @@ import { AuthService } from '../services/auth.service';
 export class RegisterComponent implements OnInit {
   roles: any = [
     {
-      value: 0,
+      value: '0',
       text: 'Manager'
     },
     {
-      value: 1,
+      value: '1',
       text: 'Developer'
     }
   ];
