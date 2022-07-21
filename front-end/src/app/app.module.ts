@@ -15,6 +15,7 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularMaterialModule } from './angular-material.module';
+import { fakeBackendProvider } from './helpers/fake-backend';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { AngularMaterialModule } from './angular-material.module';
     HttpClientModule,
     FlexLayoutModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,
+    // provider used to create fake backend
+    fakeBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

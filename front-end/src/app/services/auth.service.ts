@@ -1,45 +1,83 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-@Injectable({
-  providedIn: 'root'
-})
+import { environment } from '../../environments/environment';
+import { User } from '../models/user';
+
+@Injectable({ providedIn: 'root' })
 export class AuthService {
+    private userSubject: BehaviorSubject<User>;
+    public user: Observable<User>;
 
-  constructor(private http: HttpClient) { }
+    constructor(
+      private router: Router,
+      private http: HttpClient
+    ) {
+      const usersKey: any = localStorage.getItem('login-users');
+      this.userSubject = new BehaviorSubject<User>(usersKey);
+      this.user = this.userSubject.asObservable();
+    }
 
-  login(username: string, password: string): Observable<any> {
-    const  observablet = new Observable((subscriber: any) => {
-      subscriber.next({
-        username: 'Adrian',
-        password:'123456',
-        'auth-token': 'ewr4234'
-      });
+    public get userValue(): User {
+        return this.userSubject.value;
+    }
 
-      setTimeout(() => {
-        subscriber.next();
-        subscriber.complete();
-      }, 1000);
-    })
+    login(username: any, password: any) {
+        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
+            .pipe(map(user => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(user));
+                this.userSubject.next(user);
+                return user;
+            }));
+    }
 
-    return observablet;
-    // this.http.post(AUTH_API + 'signin', {
-    //   username,
-    //   password
-    // }, httpOptions);
-  }
+    logout() {
+        // remove user from local storage and set current user to null
+        localStorage.removeItem('user');
+        // this.userSubject.next(null);
+        this.router.navigate(['/account/login']);
+    }
 
-  register(username: string, email: string, password: string, role: object): Observable<any> {
-    return this.http.post(AUTH_API + 'signup', {
-      username,
-      email,
-      password,
-      role
-    }, httpOptions);
-  }
+    register(user: User) {
+        return this.http.post(`${environment.apiUrl}/users/register`, user);
+    }
+
+    getAll() {
+        return this.http.get<User[]>(`${environment.apiUrl}/users`);
+    }
+
+    getById(id: string) {
+        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+    }
+
+    update(id: string, params: any) {
+        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+            .pipe(map(x => {
+                // update stored user if the logged in user updated their own record
+                if (id == this.userValue.id) {
+                    // update local storage
+                    const user = { ...this.userValue, ...params };
+                    localStorage.setItem('user', JSON.stringify(user));
+
+                    // publish updated user to subscribers
+                    this.userSubject.next(user);
+                }
+                return x;
+            }));
+    }
+
+    delete(id: string) {
+        return this.http.delete(`${environment.apiUrl}/users/${id}`)
+            .pipe(map(x => {
+                // auto logout if the logged in user deleted their own record
+                if (id == this.userValue.id) {
+                    this.logout();
+                }
+                return x;
+            }));
+    }
 }

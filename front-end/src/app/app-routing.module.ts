@@ -8,13 +8,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
-  { path: 'admin', component: BoardAdminComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'login' }
+  { path: 'admin', component: BoardAdminComponent }
 ];
 
 @NgModule({

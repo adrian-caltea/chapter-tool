@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -6,49 +9,49 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent implements OnInit {
-  roles: any = [
-    {
-      value: '0',
-      text: 'Manager'
-    },
-    {
-      value: '1',
-      text: 'Developer'
+    form: FormGroup;
+    loading = false;
+    submitted = false;
+
+    constructor(
+        private formBuilder: FormBuilder,
+        private route: ActivatedRoute,
+        private router: Router,
+        private accountService: AuthService
+    ) { }
+
+    ngOnInit() {
+        this.form = this.formBuilder.group({
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            username: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(6)]]
+        });
     }
-  ];
-  form: any = {
-    username: null,
-    email: null,
-    password: null,
-    role: null
-  };
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+    // convenience getter for easy access to form fields
+    get f() { return this.form.controls; }
 
-  ngOnInit(): void {
+    onSubmit() {
+        this.submitted = true;
 
-  }
+        // stop here if form is invalid
+        if (this.form.invalid) {
+            return;
+        }
 
-  onSubmit(): void {
-    const { username, email, password, role } = this.form;
-    this.authService.register(username, email, password, role).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-      },
-      (err: { error: { message: string; }; }) => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
-  }
-
-  selectRole(event: any) {
-    this.form.role = event
-  }
+        this.loading = true;
+        this.accountService.register(this.form.value)
+            .pipe(first())
+            .subscribe({
+                next: () => {
+                    this.router.navigate(['/login'], { relativeTo: this.route });
+                },
+                error: (error: any) => {
+                  this.loading = false;
+                }
+            });
+    }
 }
