@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
-export class AuthService {
+export class AccountService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 
@@ -16,8 +16,8 @@ export class AuthService {
       private router: Router,
       private http: HttpClient
     ) {
-      const usersKey: any = localStorage.getItem('login-users');
-      this.userSubject = new BehaviorSubject<User>(usersKey);
+      const userKey: any = localStorage.getItem('user');
+      this.userSubject = new BehaviorSubject<User>(JSON.parse(userKey));
       this.user = this.userSubject.asObservable();
     }
 
@@ -39,7 +39,7 @@ export class AuthService {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
         // this.userSubject.next(null);
-        this.router.navigate(['/account/login']);
+        this.router.navigate(['/login']);
     }
 
     register(user: User) {

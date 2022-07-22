@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './models/user';
+import { AccountService } from './services/auth.service';
 import { TokenStorageService } from './services/token-storage.service';
 
 @Component({
@@ -8,26 +10,20 @@ import { TokenStorageService } from './services/token-storage.service';
 })
 export class AppComponent {
   private roles: string = '';
-  isLoggedIn = false;
-  showManagerBoard = false;
-  showDeveloperBoard = false;
-  username?: string;
+  user: User;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
-
-  ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-      this.showManagerBoard = this.roles === '0';
-      this.showDeveloperBoard = this.roles === '1';
-      this.username = user.username;
-    }
+  constructor(private tokenStorageService: TokenStorageService, private accountService: AccountService) {
+    this.accountService.user.subscribe((x: User) => {
+      this.user = x
+      console.log(this.user)
+    });
   }
 
-  logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
+  ngOnInit(): void {
+
+  }
+
+  logout() {
+    this.accountService.logout();
   }
 }

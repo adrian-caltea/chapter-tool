@@ -1,6 +1,33 @@
+<div class="container-fluid">
+  <!-- Content here -->
+  <div class="top-bar">
+    <div class="brand">
+      <div class="brand_icon-toggle">
+        ☰
+      </div>
+      <div class="brand__logo">
+        <a draggable="true" href="">
+            <img src="../../favicon.ico">
+        </a>
+      </div>
+    </div>
 
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <p>{{ content }}</p>
-  </mat-toolbar-row>
-</mat-toolbar>
+    <div class="nav">
+      <div class="search/top-bar-nav">
+        <div class="nav inner-nav">
+          <input placeholder="Search (⌘/)" class="ember-text-field nav__input open -text-field" type="text">
+          <label for="top-bar-nav-input" class="nav__icon">
+            <i class="material-icons">search</i>
+          </label>
+        </div>
+      </div>
+
+      <div class="session-menu dropdown bs-dropdown">
+        <a  href="#" >
+          <img class="session-menu__avatar-image" alt="Adi Caltea">
+          <i class="material-icons session-menu__expand-profile">expand_more</i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

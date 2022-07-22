@@ -1,0 +1,37 @@
+.top-bar {
+  display: flex;
+  flex-direction: initial;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 7px 16px;
+  border-bottom: 1px solid #e5e6eb;
+  background: #ffffff;
+  z-index: 1002;
+}
+.brand{
+  display: flex;
+  flex-shrink: 1;
+  align-items: center;
+  min-width: 30px;
+  height: 40px;
+  margin-right: 0;
+  padding: 0;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
+.brand_icon-toggle {
+  flex-grow: 1;
+  min-width: 25px;
+  margin-right: 10px;
+  padding: 0 0.335em;
+  border-radius: 3px;
+  color: #000a38;
+  cursor: pointer;
+}
+.brand__logo {
+  display: flex;
+  flex-shrink: 1;
+  align-items: center;
+}
