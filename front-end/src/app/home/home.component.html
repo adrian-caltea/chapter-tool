@@ -52,10 +52,24 @@
               >
             </a>
           </li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li>
+            <a class="dropdown-item" href="#"
+              ><i class="material-icons">account_circle</i>Edit Profile</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"
+              ><i class="material-icons">settings</i> Account Settings</a
+            >
+          </li>
+          <li (click)="logout()">
+            <a class="dropdown-item" href="#"
+              ><i class="material-icons">input</i> Sign Out</a
+            >
+          </li>
         </ul>
       </div>
     </div>
   </div>
+  <app-side-nav></app-side-nav>
 </div>

@@ -16,6 +16,7 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularMaterialModule } from './angular-material.module';
 import { fakeBackendProvider } from './helpers/fake-backend';
+import { SideNavComponent } from './pages/side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { fakeBackendProvider } from './helpers/fake-backend';
     HomeComponent,
     ProfileComponent,
     BoardAdminComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
