@@ -6,6 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-nav.component.scss'],
 })
 export class SideNavComponent implements OnInit {
+  folders: any[] = [
+    {
+      image: 'person',
+      name: 'One-on-one meeting',
+    },
+  ];
   constructor() {}
 
   ngOnInit(): void {}

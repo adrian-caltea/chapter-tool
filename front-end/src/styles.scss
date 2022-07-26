@@ -1,6 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.css";
+@import '~bootstrap/dist/css/bootstrap.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+.sidebar-workplaces__list {
+  .mat-list-base
+    .mat-list-item.mat-list-item-with-avatar
+    .mat-list-item-content
+    .mat-list-text {
+    padding-left: 0px;
+  }
 
+  .mat-list-base .mat-list-item .mat-list-icon {
+    font-size: 1.28rem;
+    opacity: 1;
+  }
+  .mat-list-base .mat-list-item .mat-list-item-content {
+    padding: 0 9px;
+  }
+  .mat-list-base .mat-list-item.mat-list-item-with-avatar {
+    height: 25px;
+  }
+}

@@ -1,12 +1,18 @@
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-    
-  </mat-drawer>
-
-  <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
-    </button>
-  </div>
-</mat-drawer-container>
+<div class="sidebar">
+  <section class="sidebar-workplaces">
+    <div class="sidebar-workplaces__header">
+      <h1 class="sidebar-workplaces__header-title">Workplaces</h1>
+    </div>
+    <section class="sidebar-workplaces__all-workplaces">
+      <div class="sidebar-workplaces__list">
+        <mat-list>
+          <mat-list-item *ngFor="let folder of folders">
+            <mat-icon mat-list-icon>{{ folder.image }}</mat-icon>
+            <div mat-line>{{ folder.name }}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </div>
+    </section>
+  </section>
+</div>

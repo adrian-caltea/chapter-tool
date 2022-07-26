@@ -1,0 +1,37 @@
+.sidebar {
+  display: flex;
+  position: relative;
+  flex: 0 0 auto;
+  flex-direction: column;
+  width: 220px;
+  background: #ffffff;
+}
+.sidebar-workplaces {
+  position: relative;
+  padding: 8px 0px;
+}
+.sidebar-workplaces__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.sidebar-workplaces__header-title {
+  height: 24px;
+  margin: 0;
+  color: #000a38;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.sidebar-workplaces__all-workplaces {
+  height: calc(100% - 8px - 88px);
+  margin: 0 -16px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.sidebar-workplaces__name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

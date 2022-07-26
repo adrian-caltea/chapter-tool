@@ -2,7 +2,9 @@
   <!-- Content here -->
   <div class="top-bar">
     <div class="brand">
-      <div class="brand_icon-toggle">☰</div>
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
       <div class="brand__logo">
         <a draggable="true" href="">
           <img
@@ -71,5 +73,12 @@
       </div>
     </div>
   </div>
-  <app-side-nav></app-side-nav>
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
+      <app-side-nav></app-side-nav>
+      asdad
+    </mat-drawer>
+
+    <div class="example-sidenav-content"></div>
+  </mat-drawer-container>
 </div>

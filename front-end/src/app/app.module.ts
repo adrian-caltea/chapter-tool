@@ -27,7 +27,7 @@ import { SideNavComponent } from './pages/side-nav/side-nav.component';
     ProfileComponent,
     BoardAdminComponent,
     BoardUserComponent,
-    SideNavComponent
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,11 +37,13 @@ import { SideNavComponent } from './pages/side-nav/side-nav.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
-  providers: [authInterceptorProviders,
+  providers: [
+    authInterceptorProviders,
     // provider used to create fake backend
-    fakeBackendProvider],
-  bootstrap: [AppComponent]
+    fakeBackendProvider,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
