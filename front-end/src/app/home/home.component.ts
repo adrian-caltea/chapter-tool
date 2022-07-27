@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { AccountService } from '../services/auth.service';
 
@@ -10,13 +10,13 @@ import { AccountService } from '../services/auth.service';
 export class HomeComponent implements OnInit {
   user: User;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.user = this.accountService.userValue;
   }
 
-  toggleSideNav() {}
+  toggleSideNav() { }
 
   logout() {
     this.accountService.logout();

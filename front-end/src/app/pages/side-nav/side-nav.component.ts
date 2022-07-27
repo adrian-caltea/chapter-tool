@@ -9,7 +9,15 @@ export class SideNavComponent implements OnInit {
   folders: any[] = [
     {
       image: 'person',
-      name: 'One-on-one meeting',
+      name: 'Weekly One-on-one meeting',
+    },
+    {
+      image: 'person',
+      name: 'Remote One-on-one meeting',
+    },
+    {
+      image: 'people',
+      name: 'Leadership meeting',
     },
   ];
   constructor() {}

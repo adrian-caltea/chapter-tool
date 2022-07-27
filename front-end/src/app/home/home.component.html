@@ -74,11 +74,16 @@
     </div>
   </div>
   <mat-drawer-container class="example-container" autosize>
-    <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
+    <mat-drawer #drawer class="example-sidenav" mode="side" opened>
       <app-side-nav></app-side-nav>
-      asdad
+       
     </mat-drawer>
-
-    <div class="example-sidenav-content"></div>
+  
+    <div class="example-sidenav-content">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Toggle sidenav
+      </button>
+    </div>
+  
   </mat-drawer-container>
 </div>

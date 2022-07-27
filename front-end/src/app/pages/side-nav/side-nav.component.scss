@@ -3,12 +3,13 @@
   position: relative;
   flex: 0 0 auto;
   flex-direction: column;
-  width: 220px;
+  width: 240px;
   background: #ffffff;
 }
 .sidebar-workplaces {
   position: relative;
   padding: 8px 0px;
+  height: calc(100% - 48px);
 }
 .sidebar-workplaces__header {
   display: flex;
@@ -26,7 +27,7 @@
 
 .sidebar-workplaces__all-workplaces {
   height: calc(100% - 8px - 88px);
-  margin: 0 -16px;
+  margin: 0 -13px;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -34,4 +35,20 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+.create-workplaces-from-template__create {
+  height: 32px;
+  padding: 16px 0;
+  box-sizing: content-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 95%;
+}
+.create-workplaces-from-template__create-button {
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
